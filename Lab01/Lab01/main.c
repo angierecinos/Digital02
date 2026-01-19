@@ -15,29 +15,30 @@
 // Encabezado (Libraries)
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include "DISPLAY7SEG/DISPLAY7SEG.h"
 #define F_CPU 16000000
 
 uint8_t contadorJ1 = 0;		// Contador para jugador 1	
 uint8_t contadorJ2 = 0;		// Contador para jugador 2
 uint8_t digito = 0;			// Conteo inicia en 5... 4... 3...
 uint8_t strt_flag = 0;		// Se presiona el botón de inicio
-
-int tabla_7seg[16] = {0x7E, 0x30, 0x6D, 0x79, 0x33, 0x5B, 0X5F, 0x70, 0x7F, 0X7B, 0x77, 0x1F, 0x4E, 0x3D, 0x4F, 0x47};
+uint8_t ganador = 0;		// Bandera para saber ganador
+uint8_t corran = 0;			// Bandera para indicar cada carrera
 
 // Function prototypes
 void setup();
 void initTMR0();
+void winner();
 
 // Main Function
 int main(void)
 {
 	setup();
 	initTMR0();
-	PORTD = tabla_7seg[0];
-	/* Replace with your application code */
+	display_mostrar(0);
 	while (1)
 	{
-		
+
 	}
 }
 
@@ -50,12 +51,9 @@ void setup()
 	CLKPR	=	(1 << CLKPCE);								// Habilita cambios en prescaler
 	CLKPR	=	(1 << CLKPS2) | (1 << CLKPS1);				// Setea prescaler a 64 para 250kHz
 	
-	
+	init_dis();												// Inicializa puerto D del display
 	DDRB	&= ~(1 << PORTB5);								// PB5, PC0 y PC1 como entradas
 	DDRC	&= ~((1 << PORTC0) | (1<< PORTC1));	
-	
-	DDRD	=	0xFF;										// PORTD como salida para los segmentos del display
-	PORTD	=	0x00;										// Apagar salidas
 	
 	DDRC	|= (1 << PORTC2) | (1 << PORTC3) | (1 << PORTC4) | (1 << PORTC5);	// Leds
 	DDRB	|= (1 << PORTB1) | (1 << PORTB2) | (1 << PORTB3) | (1 << PORTB4);	// Leds
@@ -77,6 +75,30 @@ void initTMR0()
 	TCCR0A	=	0;	TCCR0B |=	(1 << CS02) | (1 << CS00);		// Setear prescaler a 1024	TCNT0	=	134;							// Cargar valor para delay de 0.5s	TIMSK0	=	(1 << TOIE0);
 }
 
+void winner()
+{
+	contadorJ1 = 0;
+	contadorJ2 = 0;
+	
+	if (ganador == 1)
+	{
+		ganador = 0;
+		corran = 0;
+		PORTC |= (1 << PORTC2) | (1 << PORTC3) | (1 << PORTC4) | (1 << PORTC5);
+		PORTB &= ~((1 << PORTB1) | (1 << PORTB2) | (1 << PORTB3) | (1 << PORTB4));
+		display_mostrar(1);
+	}
+	else if (ganador == 2)
+	{
+		ganador = 0;
+		corran = 0;
+		PORTB |= (1 << PORTB1) | (1 << PORTB2) | (1 << PORTB3) | (1 << PORTB4);
+		PORTC &= ~((1 << PORTC2) | (1 << PORTC3) | (1 << PORTC4) | (1 << PORTC5));
+		display_mostrar(2);
+	}
+	
+}
+
 // Interrupt routines
 ISR(TIMER0_OVF_vect)
 {
@@ -88,34 +110,34 @@ ISR(TIMER0_OVF_vect)
 			
 			switch(digito){
 				case 1:
-				PORTD = tabla_7seg[5];
+				display_mostrar(5);
 				break;
 				
 				case 2:
-				PORTD = tabla_7seg[4];
+				display_mostrar(4);
 				break;
 				
 				case 3:
-				PORTD = tabla_7seg[3];
+				display_mostrar(3);
 				break;
 				
 				case 4:
-				PORTD = tabla_7seg[2];
+				display_mostrar(2);
 				break;
 				
 				case 5:
-				PORTD = tabla_7seg[1];
+				display_mostrar(1);
 				break;
 				
 				case 6:
-				PORTD = tabla_7seg[0];
+				display_mostrar(0);
 				strt_flag = 0; 
+				corran = 1;
 				break;
 			}
 		}
 		else {
 			digito = 0;
-			PORTD = tabla_7seg[0];
 		}
 		
 	}
@@ -125,6 +147,8 @@ ISR(PCINT0_vect)
 	if (!(PINB & ( 1 << PORTB5)))
 	{
 		strt_flag = 1;
+		PORTB &= ~((1 << PORTB1) | (1 << PORTB2) | (1 << PORTB3) | (1 << PORTB4));
+		PORTC &= ~((1 << PORTC2) | (1 << PORTC3) | (1 << PORTC4) | (1 << PORTC5));
 	}
 }
 
@@ -132,22 +156,48 @@ ISR(PCINT0_vect)
 
 ISR(PCINT1_vect)
 {
+	// Botón jugador 1
 	if (!(PINC & ( 1 << PORTC0)))
 	{
-		if (contadorJ1 > 16)
-		{
-			contadorJ1 = 0;
-			PORTC = (PORTC & 0x03) | (contadorJ1 << 2);
-		}
-		else 
+		if (corran)
 		{
 			contadorJ1++;
-			PORTB = (PORTB & 0x03) | (contadorJ1 << 2);
 		}
+		
+		if (contadorJ1 < 4 && corran == 1)
+		{
+			//contadorJ1++;
+			// Empieza en PORTC2 porque en PC0 y PC1 hay botones
+			PORTC |= (1 << (PORTC2 + contadorJ1 - 1));
+		} 
+		else if (contadorJ1 == 4 && corran == 1)
+		{
+			PORTC |= (1 << (PORTC2 + contadorJ1 - 1));
+			ganador = 1;
+			winner();
+		}
+		
 	}
+
+	// Botón jugador 2
 	if (!(PINC & (1 << PORTC1)))
 	{
-		contadorJ2++;
+		
+		if (corran)
+		{
+			contadorJ2++;
+		}
+	
+		if (contadorJ2 < 4 && corran == 1)
+		{
+			PORTB |= (1 << (PORTB1 + contadorJ2 - 1));
+		}
+		else if (contadorJ2 == 4 && corran == 1 )
+		{
+			PORTB |= (1 << (PORTB1 + contadorJ2 - 1));
+			ganador = 2;
+			winner();
+		}
 	}
 }
 

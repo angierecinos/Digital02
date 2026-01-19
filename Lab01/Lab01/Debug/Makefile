@@ -32,11 +32,13 @@ LIB_DEP:=
 LINKER_SCRIPT_DEP:=
 
 # Every subdirectory with source files must be described here
-SUBDIRS := 
+SUBDIRS :=  \
+../Display7seg
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../Display7seg/DISPLAY7SEG.c \
 ../main.c
 
 
@@ -47,15 +49,19 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+Display7seg/DISPLAY7SEG.o \
 main.o
 
 OBJS_AS_ARGS +=  \
+Display7seg/DISPLAY7SEG.o \
 main.o
 
 C_DEPS +=  \
+Display7seg/DISPLAY7SEG.d \
 main.d
 
 C_DEPS_AS_ARGS +=  \
+Display7seg/DISPLAY7SEG.d \
 main.d
 
 OUTPUT_FILE_PATH +=Lab01.elf
@@ -72,6 +78,13 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+Display7seg/DISPLAY7SEG.o: ../Display7seg/DISPLAY7SEG.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 ./main.o: .././main.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
