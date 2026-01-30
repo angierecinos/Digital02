@@ -5,10 +5,14 @@
  *  Author: Angie
  */ 
 
-
 #ifndef SPI_H_
 #define SPI_H_
 
+#define F_CPU 16000000
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <util/delay.h>
+#include <stdint.h>
 
 typedef enum
 {

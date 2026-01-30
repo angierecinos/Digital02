@@ -6,6 +6,11 @@
  */ 
 
 #include "SPI.h"
+#define F_CPU 16000000
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <util/delay.h>
+#include <stdint.h>
 
 void initSPI(SPI_Type sType, SPI_Data_Order sDataOrder, SPI_Clock_Polarity sClockPolarity, SPI_Clock_Phase sClockPhase)
 {
@@ -85,18 +90,18 @@ void initSPI(SPI_Type sType, SPI_Data_Order sDataOrder, SPI_Clock_Polarity sCloc
 	 
 }
 
-static void spiReceiveWait()
+/*static void spiReceiveWait()
 {
 	// Wait for data 2 fully receive
 	while(!(SPSR & (1 << SPIF)));
-}
+}*/
 
 void spiWrite(uint8_t dato)
 {
 	SPDR = dato;
 }
 
-void spiDataReady()
+unsigned spiDataReady()
 {
 	if(SPSR & (1 << SPIF))
 	return 1;
