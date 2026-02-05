@@ -60,30 +60,6 @@ int main(void)
 	setup();
     while (1) 
     {
-		// Selecciona el slave = 0 (se quiere hablar con el)
-		//PORTC &= ~(1 << PORTC5); 
-		/*spiWrite('c');
-		
-		// Dato basura
-		spiWrite(0x00); */
-		
-		/*spiWrite('c');	
-		_delay_ms(50);
-		spiWrite(0x00);
-		_delay_ms(50);
-		pot0 = spiRead();
-		
-		spiWrite('c');
-		_delay_ms(50);
-		spiWrite(0x00);
-		_delay_ms(50);
-		pot1 = spiRead();*/
-		
-		/*(void)spiTransfer(0x00);      // dummy para alinear (descartar)
-		pot0 = spiTransfer(0x00);     // pot1
-		pot1 = spiTransfer(0x00);*/    // pot2
-		
-		//PORTC |= (1 << PORTC5); // Slave select = 1
 		
 		if (menu_flag)
 		{
@@ -110,8 +86,6 @@ int main(void)
 			option = 0;
 			menu_flag = 1;
 		}
-		//refreshPORT(valorSPI);
-		
 		
 		_delay_ms(250);
     }
@@ -166,10 +140,6 @@ void showPot()
 		
 		// Selecciona el slave = 0 (se quiere hablar con el)
 		PORTC &= ~(1 << PORTC5); 
-		/*spiWrite('c');
-		
-		// Dato basura
-		spiWrite(0x00); */
 		
 		spiWrite('c');	
 		_delay_ms(50);
@@ -182,10 +152,6 @@ void showPot()
 		spiWrite(0x00);
 		_delay_ms(50);
 		pot1 = spiRead();
-		
-		/*(void)spiTransfer(0x00);      // dummy para alinear (descartar)
-		pot0 = spiTransfer(0x00);     // pot1
-		pot1 = spiTransfer(0x00);*/    // pot2
 		
 		PORTC |= (1 << PORTC5); // Slave select = 1
 		
