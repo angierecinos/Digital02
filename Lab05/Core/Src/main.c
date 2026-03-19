@@ -131,8 +131,8 @@ int main(void)
 	  delta = flanco2 - flanco1;
 	  frecuencia = (ftimclk) / (float) delta;
 
-	  sprintf(array, "%d", (int)frecuencia);
-	  HAL_UART_Transmit(&huart2, array, sizeof(array), 1000);
+	  sprintf(array, "%.2f", frecuencia);
+	  HAL_UART_Transmit(&huart2, array, strlen(array), 1000);
 
 	  HAL_TIM_IC_Start_IT(&htim2, TIM_CHANNEL_1);
 

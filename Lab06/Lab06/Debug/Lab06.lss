@@ -1,0 +1,453 @@
+
+Lab06.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000076  00800100  00000252  000002e6  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000252  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000002  00800176  00800176  0000035c  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  0000035c  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  0000038c  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000068  00000000  00000000  000003cc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   000008d5  00000000  00000000  00000434  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00000750  00000000  00000000  00000d09  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00000448  00000000  00000000  00001459  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  000000c8  00000000  00000000  000018a4  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    000003b4  00000000  00000000  0000196c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    00000109  00000000  00000000  00001d20  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000048  00000000  00000000  00001e29  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   8:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   c:	0c 94 aa 00 	jmp	0x154	; 0x154 <__vector_3>
+  10:	0c 94 c7 00 	jmp	0x18e	; 0x18e <__vector_4>
+  14:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  18:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  1c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  20:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  24:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  28:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  2c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  30:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  34:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  38:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  3c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  40:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  44:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  48:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  4c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  50:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  54:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  58:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  5c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  60:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  64:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_copy_data>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	e2 e5       	ldi	r30, 0x52	; 82
+  7c:	f2 e0       	ldi	r31, 0x02	; 2
+  7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
+  80:	05 90       	lpm	r0, Z+
+  82:	0d 92       	st	X+, r0
+  84:	a6 37       	cpi	r26, 0x76	; 118
+  86:	b1 07       	cpc	r27, r17
+  88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
+
+0000008a <__do_clear_bss>:
+  8a:	21 e0       	ldi	r18, 0x01	; 1
+  8c:	a6 e7       	ldi	r26, 0x76	; 118
+  8e:	b1 e0       	ldi	r27, 0x01	; 1
+  90:	01 c0       	rjmp	.+2      	; 0x94 <.do_clear_bss_start>
+
+00000092 <.do_clear_bss_loop>:
+  92:	1d 92       	st	X+, r1
+
+00000094 <.do_clear_bss_start>:
+  94:	a8 37       	cpi	r26, 0x78	; 120
+  96:	b2 07       	cpc	r27, r18
+  98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
+  9a:	0e 94 73 00 	call	0xe6	; 0xe6 <main>
+  9e:	0c 94 27 01 	jmp	0x24e	; 0x24e <_exit>
+
+000000a2 <__bad_interrupt>:
+  a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000a6 <setup>:
+
+//
+// NON-Interrupt subroutines
+void setup()
+{
+	cli();
+  a6:	f8 94       	cli
+	
+	// Configurar prescaler de sistemas
+	//CLKPR	= (1 << CLKPCE);					// Habilita cambios en prescaler
+	//CLKPR	= (1 << CLKPS2);					// Setea presc a 16 para 1MHz
+	
+	DDRB  &= ~((1 << PORTB0) | (1 << PORTB1));									// Se setean PC5 y PC0 como entradas
+  a8:	84 b1       	in	r24, 0x04	; 4
+  aa:	8c 7f       	andi	r24, 0xFC	; 252
+  ac:	84 b9       	out	0x04, r24	; 4
+	PORTB |= (1 << PORTB0) | (1 << PORTB1);
+  ae:	85 b1       	in	r24, 0x05	; 5
+  b0:	83 60       	ori	r24, 0x03	; 3
+  b2:	85 b9       	out	0x05, r24	; 5
+	
+	DDRC  &= ~((1 << PORTC0) | (1 << PORTC1)| (1 << PORTC2) | (1 << PORTC3));	// Se setean PC5 y PC0 como entradas
+  b4:	87 b1       	in	r24, 0x07	; 7
+  b6:	80 7f       	andi	r24, 0xF0	; 240
+  b8:	87 b9       	out	0x07, r24	; 7
+	PORTC |= (1 << PORTC0) | (1 << PORTC1) | (1 << PORTC2) | (1 << PORTC3);		// Se habilitan los pull ups internos
+  ba:	88 b1       	in	r24, 0x08	; 8
+  bc:	8f 60       	ori	r24, 0x0F	; 15
+  be:	88 b9       	out	0x08, r24	; 8
+	
+	//UCSR0B	= 0x00;															// Apaga serial
+	
+	// -------- PORTC (PC0–PC3) --------
+	PCICR	|= (1 << PCIE1) | (1 << PCIE0);										// Se habilitan interrupciones pin-change
+  c0:	e8 e6       	ldi	r30, 0x68	; 104
+  c2:	f0 e0       	ldi	r31, 0x00	; 0
+  c4:	80 81       	ld	r24, Z
+  c6:	83 60       	ori	r24, 0x03	; 3
+  c8:	80 83       	st	Z, r24
+	// -------- PORTB (PB0–PB1) --------
+	PCMSK0 |= (1 << PCINT0) | (1 << PCINT1);
+  ca:	eb e6       	ldi	r30, 0x6B	; 107
+  cc:	f0 e0       	ldi	r31, 0x00	; 0
+  ce:	80 81       	ld	r24, Z
+  d0:	83 60       	ori	r24, 0x03	; 3
+  d2:	80 83       	st	Z, r24
+	PCMSK1	|= (1 << PCINT8) | (1 << PCINT9) | (1 << PCINT10) | (1 << PCINT11);	// Se habilitan solo para los PC5 y PC6
+  d4:	ec e6       	ldi	r30, 0x6C	; 108
+  d6:	f0 e0       	ldi	r31, 0x00	; 0
+  d8:	80 81       	ld	r24, Z
+  da:	8f 60       	ori	r24, 0x0F	; 15
+  dc:	80 83       	st	Z, r24
+	
+	
+	
+	initUART();
+  de:	0e 94 f6 00 	call	0x1ec	; 0x1ec <initUART>
+	
+	sei();
+  e2:	78 94       	sei
+  e4:	08 95       	ret
+
+000000e6 <main>:
+void setup();
+
+
+int main(void)
+{
+    setup();
+  e6:	0e 94 53 00 	call	0xa6	; 0xa6 <setup>
+	/* Replace with your application code */
+    while (1) 
+    {
+		if (btn_flag == 1)
+  ea:	80 91 76 01 	lds	r24, 0x0176	; 0x800176 <__data_end>
+  ee:	81 30       	cpi	r24, 0x01	; 1
+  f0:	e1 f7       	brne	.-8      	; 0xea <main+0x4>
+		{
+			btn_flag = 0;
+  f2:	10 92 76 01 	sts	0x0176, r1	; 0x800176 <__data_end>
+			switch (boton)
+  f6:	80 91 77 01 	lds	r24, 0x0177	; 0x800177 <boton>
+  fa:	84 34       	cpi	r24, 0x44	; 68
+  fc:	69 f0       	breq	.+26     	; 0x118 <main+0x32>
+  fe:	28 f4       	brcc	.+10     	; 0x10a <main+0x24>
+ 100:	81 34       	cpi	r24, 0x41	; 65
+ 102:	f1 f0       	breq	.+60     	; 0x140 <main+0x5a>
+ 104:	82 34       	cpi	r24, 0x42	; 66
+ 106:	09 f1       	breq	.+66     	; 0x14a <main+0x64>
+ 108:	f0 cf       	rjmp	.-32     	; 0xea <main+0x4>
+ 10a:	85 35       	cpi	r24, 0x55	; 85
+ 10c:	a1 f0       	breq	.+40     	; 0x136 <main+0x50>
+ 10e:	8a 35       	cpi	r24, 0x5A	; 90
+ 110:	69 f0       	breq	.+26     	; 0x12c <main+0x46>
+ 112:	89 34       	cpi	r24, 0x49	; 73
+ 114:	51 f7       	brne	.-44     	; 0xea <main+0x4>
+ 116:	05 c0       	rjmp	.+10     	; 0x122 <main+0x3c>
+			{
+			case 'D': 
+			sendString("Control _2: Derecha\r\n");
+ 118:	80 e0       	ldi	r24, 0x00	; 0
+ 11a:	91 e0       	ldi	r25, 0x01	; 1
+ 11c:	0e 94 14 01 	call	0x228	; 0x228 <sendString>
+			break;
+ 120:	e4 cf       	rjmp	.-56     	; 0xea <main+0x4>
+			
+			case 'I':
+			sendString("Control _2: Izquierda\r\n");
+ 122:	86 e1       	ldi	r24, 0x16	; 22
+ 124:	91 e0       	ldi	r25, 0x01	; 1
+ 126:	0e 94 14 01 	call	0x228	; 0x228 <sendString>
+			break;
+ 12a:	df cf       	rjmp	.-66     	; 0xea <main+0x4>
+			
+			case 'Z':
+			sendString("Control _2: Abajo\r\n");
+ 12c:	8e e2       	ldi	r24, 0x2E	; 46
+ 12e:	91 e0       	ldi	r25, 0x01	; 1
+ 130:	0e 94 14 01 	call	0x228	; 0x228 <sendString>
+			break;
+ 134:	da cf       	rjmp	.-76     	; 0xea <main+0x4>
+			
+			case 'U':
+			sendString("Control_2: Arriba\r\n");
+ 136:	82 e4       	ldi	r24, 0x42	; 66
+ 138:	91 e0       	ldi	r25, 0x01	; 1
+ 13a:	0e 94 14 01 	call	0x228	; 0x228 <sendString>
+			break;
+ 13e:	d5 cf       	rjmp	.-86     	; 0xea <main+0x4>
+			
+			case 'A':
+			sendString("Control _2: A\r\n");
+ 140:	86 e5       	ldi	r24, 0x56	; 86
+ 142:	91 e0       	ldi	r25, 0x01	; 1
+ 144:	0e 94 14 01 	call	0x228	; 0x228 <sendString>
+			break;
+ 148:	d0 cf       	rjmp	.-96     	; 0xea <main+0x4>
+			
+			case 'B':
+			sendString("Control _2: B\r\n");
+ 14a:	86 e6       	ldi	r24, 0x66	; 102
+ 14c:	91 e0       	ldi	r25, 0x01	; 1
+ 14e:	0e 94 14 01 	call	0x228	; 0x228 <sendString>
+			break;
+ 152:	cb cf       	rjmp	.-106    	; 0xea <main+0x4>
+
+00000154 <__vector_3>:
+}
+
+//
+// Interrupt routines
+
+ISR(PCINT0_vect){
+ 154:	1f 92       	push	r1
+ 156:	0f 92       	push	r0
+ 158:	0f b6       	in	r0, 0x3f	; 63
+ 15a:	0f 92       	push	r0
+ 15c:	11 24       	eor	r1, r1
+ 15e:	8f 93       	push	r24
+	if (!(PINB & (1 << PORTB0)))						// Se revisa si el botón está presionado
+ 160:	18 99       	sbic	0x03, 0	; 3
+ 162:	07 c0       	rjmp	.+14     	; 0x172 <__vector_3+0x1e>
+	{
+		btn_flag = 1;
+ 164:	81 e0       	ldi	r24, 0x01	; 1
+ 166:	80 93 76 01 	sts	0x0176, r24	; 0x800176 <__data_end>
+		boton = 'B';
+ 16a:	82 e4       	ldi	r24, 0x42	; 66
+ 16c:	80 93 77 01 	sts	0x0177, r24	; 0x800177 <boton>
+ 170:	08 c0       	rjmp	.+16     	; 0x182 <__vector_3+0x2e>
+	}
+	else if (!(PINB & (1 << PORTB1)))					// Se revisa si el botón está presionado
+ 172:	19 99       	sbic	0x03, 1	; 3
+ 174:	06 c0       	rjmp	.+12     	; 0x182 <__vector_3+0x2e>
+	{
+		btn_flag = 1;
+ 176:	81 e0       	ldi	r24, 0x01	; 1
+ 178:	80 93 76 01 	sts	0x0176, r24	; 0x800176 <__data_end>
+		boton = 'A';
+ 17c:	81 e4       	ldi	r24, 0x41	; 65
+ 17e:	80 93 77 01 	sts	0x0177, r24	; 0x800177 <boton>
+	}
+}
+ 182:	8f 91       	pop	r24
+ 184:	0f 90       	pop	r0
+ 186:	0f be       	out	0x3f, r0	; 63
+ 188:	0f 90       	pop	r0
+ 18a:	1f 90       	pop	r1
+ 18c:	18 95       	reti
+
+0000018e <__vector_4>:
+
+ISR(PCINT1_vect){
+ 18e:	1f 92       	push	r1
+ 190:	0f 92       	push	r0
+ 192:	0f b6       	in	r0, 0x3f	; 63
+ 194:	0f 92       	push	r0
+ 196:	11 24       	eor	r1, r1
+ 198:	8f 93       	push	r24
+	if (!(PINC & (1 << PORTC0)))						// Se revisa si el botón de modo está presionado
+ 19a:	30 99       	sbic	0x06, 0	; 6
+ 19c:	07 c0       	rjmp	.+14     	; 0x1ac <__vector_4+0x1e>
+	{
+		btn_flag = 1; 
+ 19e:	81 e0       	ldi	r24, 0x01	; 1
+ 1a0:	80 93 76 01 	sts	0x0176, r24	; 0x800176 <__data_end>
+		boton = 'D';
+ 1a4:	84 e4       	ldi	r24, 0x44	; 68
+ 1a6:	80 93 77 01 	sts	0x0177, r24	; 0x800177 <boton>
+ 1aa:	1a c0       	rjmp	.+52     	; 0x1e0 <__vector_4+0x52>
+	}
+	else if (!(PINC & (1 << PORTC1)))					// Se revisa si el botón de EEPROM está presionado
+ 1ac:	31 99       	sbic	0x06, 1	; 6
+ 1ae:	07 c0       	rjmp	.+14     	; 0x1be <__vector_4+0x30>
+	{
+		btn_flag = 1;
+ 1b0:	81 e0       	ldi	r24, 0x01	; 1
+ 1b2:	80 93 76 01 	sts	0x0176, r24	; 0x800176 <__data_end>
+		boton = 'I';
+ 1b6:	89 e4       	ldi	r24, 0x49	; 73
+ 1b8:	80 93 77 01 	sts	0x0177, r24	; 0x800177 <boton>
+ 1bc:	11 c0       	rjmp	.+34     	; 0x1e0 <__vector_4+0x52>
+	}
+	else if (!(PINC & (1 << PORTC2)))					// Se revisa si el botón de EEPROM está presionado
+ 1be:	32 99       	sbic	0x06, 2	; 6
+ 1c0:	07 c0       	rjmp	.+14     	; 0x1d0 <__vector_4+0x42>
+	{
+		btn_flag = 1;
+ 1c2:	81 e0       	ldi	r24, 0x01	; 1
+ 1c4:	80 93 76 01 	sts	0x0176, r24	; 0x800176 <__data_end>
+		boton = 'Z';
+ 1c8:	8a e5       	ldi	r24, 0x5A	; 90
+ 1ca:	80 93 77 01 	sts	0x0177, r24	; 0x800177 <boton>
+ 1ce:	08 c0       	rjmp	.+16     	; 0x1e0 <__vector_4+0x52>
+	}
+	else if (!(PINC & (1 << PORTC3)))					// Se revisa si el botón de EEPROM está presionado
+ 1d0:	33 99       	sbic	0x06, 3	; 6
+ 1d2:	06 c0       	rjmp	.+12     	; 0x1e0 <__vector_4+0x52>
+	{
+		btn_flag = 1;
+ 1d4:	81 e0       	ldi	r24, 0x01	; 1
+ 1d6:	80 93 76 01 	sts	0x0176, r24	; 0x800176 <__data_end>
+		boton = 'U';
+ 1da:	85 e5       	ldi	r24, 0x55	; 85
+ 1dc:	80 93 77 01 	sts	0x0177, r24	; 0x800177 <boton>
+	}
+}
+ 1e0:	8f 91       	pop	r24
+ 1e2:	0f 90       	pop	r0
+ 1e4:	0f be       	out	0x3f, r0	; 63
+ 1e6:	0f 90       	pop	r0
+ 1e8:	1f 90       	pop	r1
+ 1ea:	18 95       	reti
+
+000001ec <initUART>:
+#include "UART.h"
+
+void initUART()
+{
+	// Configurar PD0 y PD1
+	DDRD |=  (1 << DDD1);
+ 1ec:	8a b1       	in	r24, 0x0a	; 10
+ 1ee:	82 60       	ori	r24, 0x02	; 2
+ 1f0:	8a b9       	out	0x0a, r24	; 10
+	DDRD &= ~(1 << DDD0);
+ 1f2:	8a b1       	in	r24, 0x0a	; 10
+ 1f4:	8e 7f       	andi	r24, 0xFE	; 254
+ 1f6:	8a b9       	out	0x0a, r24	; 10
+	
+	// Se apaga (no utilizo doble velocidad)
+	UCSR0A = 0;
+ 1f8:	10 92 c0 00 	sts	0x00C0, r1	; 0x8000c0 <__TEXT_REGION_LENGTH__+0x7f80c0>
+	// Habilitar interrupts recibir, recepcion y transmision
+	UCSR0B |= (1 << RXCIE0) | (1 << RXEN0) | (1 << TXEN0);
+ 1fc:	e1 ec       	ldi	r30, 0xC1	; 193
+ 1fe:	f0 e0       	ldi	r31, 0x00	; 0
+ 200:	80 81       	ld	r24, Z
+ 202:	88 69       	ori	r24, 0x98	; 152
+ 204:	80 83       	st	Z, r24
+	// Modo asíncrono y con paridad deshabilitada | Quiero 8 bits
+	UCSR0C = (1 << UCSZ01) | (1 << UCSZ00);
+ 206:	86 e0       	ldi	r24, 0x06	; 6
+ 208:	80 93 c2 00 	sts	0x00C2, r24	; 0x8000c2 <__TEXT_REGION_LENGTH__+0x7f80c2>
+	// Valor UBRR = 103 -> 9600 @ 16MHz
+	UBRR0 = 103;
+ 20c:	87 e6       	ldi	r24, 0x67	; 103
+ 20e:	90 e0       	ldi	r25, 0x00	; 0
+ 210:	90 93 c5 00 	sts	0x00C5, r25	; 0x8000c5 <__TEXT_REGION_LENGTH__+0x7f80c5>
+ 214:	80 93 c4 00 	sts	0x00C4, r24	; 0x8000c4 <__TEXT_REGION_LENGTH__+0x7f80c4>
+ 218:	08 95       	ret
+
+0000021a <writeChar>:
+}
+
+void writeChar(char caracter)
+{
+	// Si no se hubiera esperado a que termine de trasladar, puede dar un error
+	while ((UCSR0A & (1 << UDRE0)) == 0);
+ 21a:	90 91 c0 00 	lds	r25, 0x00C0	; 0x8000c0 <__TEXT_REGION_LENGTH__+0x7f80c0>
+ 21e:	95 ff       	sbrs	r25, 5
+ 220:	fc cf       	rjmp	.-8      	; 0x21a <writeChar>
+	UDR0 = caracter;
+ 222:	80 93 c6 00 	sts	0x00C6, r24	; 0x8000c6 <__TEXT_REGION_LENGTH__+0x7f80c6>
+ 226:	08 95       	ret
+
+00000228 <sendString>:
+	
+}
+
+void sendString(char* texto)
+{
+ 228:	0f 93       	push	r16
+ 22a:	1f 93       	push	r17
+ 22c:	cf 93       	push	r28
+ 22e:	8c 01       	movw	r16, r24
+	// Se hace siempre que indice sea diferente de un valor "nulo"
+	// Aumenta el valor de indice
+	for (uint8_t indice = 0; *(texto + indice) != '\0'; indice++)
+ 230:	c0 e0       	ldi	r28, 0x00	; 0
+ 232:	03 c0       	rjmp	.+6      	; 0x23a <sendString+0x12>
+	{
+		writeChar(texto[indice]);
+ 234:	0e 94 0d 01 	call	0x21a	; 0x21a <writeChar>
+
+void sendString(char* texto)
+{
+	// Se hace siempre que indice sea diferente de un valor "nulo"
+	// Aumenta el valor de indice
+	for (uint8_t indice = 0; *(texto + indice) != '\0'; indice++)
+ 238:	cf 5f       	subi	r28, 0xFF	; 255
+ 23a:	f8 01       	movw	r30, r16
+ 23c:	ec 0f       	add	r30, r28
+ 23e:	f1 1d       	adc	r31, r1
+ 240:	80 81       	ld	r24, Z
+ 242:	81 11       	cpse	r24, r1
+ 244:	f7 cf       	rjmp	.-18     	; 0x234 <sendString+0xc>
+	{
+		writeChar(texto[indice]);
+	}
+}
+ 246:	cf 91       	pop	r28
+ 248:	1f 91       	pop	r17
+ 24a:	0f 91       	pop	r16
+ 24c:	08 95       	ret
+
+0000024e <_exit>:
+ 24e:	f8 94       	cli
+
+00000250 <__stop_program>:
+ 250:	ff cf       	rjmp	.-2      	; 0x250 <__stop_program>
