@@ -1,0 +1,15 @@
+../Core/Src/main.c:215:6:actualizarY_Mario	40	static
+../Core/Src/main.c:250:6:crearBarril	16	static
+../Core/Src/main.c:264:6:actualizarY_Objeto	56	static
+../Core/Src/main.c:297:6:actualizarBarriles	32	static
+../Core/Src/main.c:348:5:main	80	static
+../Core/Src/main.c:714:6:SystemClock_Config	88	static
+../Core/Src/main.c:762:13:MX_SPI1_Init	8	static
+../Core/Src/main.c:800:13:MX_USART1_UART_Init	8	static
+../Core/Src/main.c:833:13:MX_USART2_UART_Init	8	static
+../Core/Src/main.c:866:13:MX_USART6_UART_Init	8	static
+../Core/Src/main.c:897:13:MX_DMA_Init	16	static
+../Core/Src/main.c:915:13:MX_GPIO_Init	48	static
+../Core/Src/main.c:968:6:HAL_UART_RxCpltCallback	16	static
+../Core/Src/main.c:1033:6:HAL_SPI_TxCpltCallback	16	static
+../Core/Src/main.c:1045:6:Error_Handler	4	static,ignoring_inline_asm

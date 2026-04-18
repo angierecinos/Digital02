@@ -1,0 +1,16 @@
+../Core/Src/ili9341.c:42:6:LCD_Init	8	static
+../Core/Src/ili9341.c:148:6:LCD_CMD	16	static
+../Core/Src/ili9341.c:166:6:LCD_DATA	16	static
+../Core/Src/ili9341.c:175:6:SetWindows	24	static
+../Core/Src/ili9341.c:192:6:LCD_Clear	24	static
+../Core/Src/ili9341.c:212:6:H_line	32	static
+../Core/Src/ili9341.c:232:6:V_line	32	static
+../Core/Src/ili9341.c:252:6:Rect	24	static
+../Core/Src/ili9341.c:262:6:FillRect	40	static
+../Core/Src/ili9341.c:287:6:LCD_Print	104	dynamic
+../Core/Src/ili9341.c:352:6:LCD_Bitmap	40	static
+../Core/Src/ili9341.c:375:6:LCD_BitmapTransparent	40	static
+../Core/Src/ili9341.c:395:6:LCD_Bitmap_DMA	24	static
+../Core/Src/ili9341.c:414:6:LCD_DibujarSpriteUniversal	80	static
+../Core/Src/ili9341.c:456:6:LCD_RestaurarFondo	56	static
+../Core/Src/ili9341.c:482:6:LCD_Sprite	64	static
